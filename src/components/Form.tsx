@@ -9,6 +9,8 @@ interface FormProps{
     onNewSub: (newSub: Sub) => void
 }
 
+
+
 const Form = ({onNewSub}:FormProps) => {
     const [inputValues, setInputValues] = useState<FormState["inputValues"]
     >({
@@ -22,6 +24,7 @@ const Form = ({onNewSub}:FormProps) => {
     const handleSubmit= (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         onNewSub(inputValues)
+        handleClear()
     }  
 
     const handleChange = (e:React.ChangeEvent<HTMLInputElement | 
@@ -29,6 +32,16 @@ const Form = ({onNewSub}:FormProps) => {
         setInputValues({
             ...inputValues,
             [e.target.name]: e.target.value
+        })
+        
+    }
+
+    const handleClear= () => {
+        setInputValues({
+            nick: '',
+            subMonths: 0,
+            avatar: '',
+            description: ''
         })
     }
     
@@ -40,8 +53,8 @@ const Form = ({onNewSub}:FormProps) => {
                 <input onChange={handleChange} value={inputValues.avatar} type="text" name="avatar" placeholder="avatar"/>
                 <input onChange={handleChange} value={inputValues.description} type="text" name="description" placeholder="description"/>
             
-
-                <button>Save new sub</button>
+                <button onClick={handleClear} type="button">Clear the form</button>
+                <button type="submit">Save new sub</button>
 
             </form>
             

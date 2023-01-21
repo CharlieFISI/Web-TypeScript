@@ -50,7 +50,7 @@ function App() {
     <div className="App" ref={divRef}>
      <h1>Midu Subs</h1>
       <List subs={subs}/>
-      <Form onNewSub={setSubs}/>
+      <Form onNewSub={handlNewSub}/>
     </div>
   );
 }
