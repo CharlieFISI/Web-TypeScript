@@ -27,7 +27,7 @@ const INITIAL_STATE=
   description: 'Dapelu hace de moderador aveces'
   },
   {
-  nick:'Charlie mongol',
+  nick:'Kize',
   subMonths: 5,
   avatar: 'https://i.pravatar.cc/150?u=sergio_serrano', // Avatar : midu, dapelu 
   description: 'Charlie hace de moderador aveces'
