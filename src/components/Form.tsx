@@ -1,57 +1,45 @@
 import React, {useReducer, useState } from "react";
+import useNweSubForm from "../hooks/useNewSubForm.tsx";
 import {Sub} from './types.d.ts';
 
-interface FormState{
-    inputValues: Sub
-}
+
 
 interface FormProps{
     onNewSub: (newSub: Sub) => void
 }
 
-const INITIAL_STATE = {
-    nick: '',
-    subMonths: 0,
-    avatar: '',
-    description: ''
-}
 
-const FormReducer = (state, action) => {
-    switch (action.type){
-        case "change_value":
-            const {inputName, inputValue} = action.payload
-            return{
-                ... state
-                [inputName]: inputValue
-            }
-        case "clear":
-            return INITIAL_STATE
-    }
-}
+
 
 const Form = ({onNewSub}:FormProps) => {
     /* const [inputValues, setInputValues] = useState<FormState["inputValues"]
     >(INITIAL_STATE) */
 
-    const [inputValues, dispatch] = useReducer(formReducer, INITIAL_STATE)
+    const [inputValues, dispatch] = useNweSubForm()
 
     const handleSubmit= (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         onNewSub(inputValues)
-        handleClear()
+        dispatch({type: "clear"})
     }  
 
     const handleChange = (e:React.ChangeEvent<HTMLInputElement | 
         HTMLTextAreaElement>) => {
-        setInputValues({
-            ...inputValues,
-            [e.target.name]: e.target.value
-        })
+            const {name,value} = e.target
+
+            dispatch({
+                type: "change_value",
+                payload: {
+                    inputName: name,
+                    inputValue: value
+                }
+            })
+            
         
     }
-
+    
     const handleClear= () => {
-        setInputValues(INITIAL_STATE)
+        dispatch({type: "clear"})
     }
     
     return (

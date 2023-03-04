@@ -6,3 +6,9 @@ export interface Sub{
     description: string
 }
 
+export type SubsResponseFromApi = Array<{
+    nick: string
+    months: number
+    profileUrl: string
+    description: string
+}>
